@@ -27,7 +27,7 @@ pot = 0 # irmao do pos, diferente do pos, eu sei oque esse faz, serve só pra po
 resultado_pot = 1 #nao vou mexer no pot, nao mexe no que ta funcionando
 #=================================Código==========================
 while valido == True:
-    if num or decimal or count_char or char or R or Q or octal or pos or pot or resultado_pot != 0: # o famoso if do reset de variavel # posso por uma unica varial (ex: reset == true pra resetar tudo)
+    if num or decimal or count_char or char or R or Q or octal or pos or pot != 0: # o famoso if do reset de variavel # posso por uma unica varial (ex: reset == true pra resetar tudo)
         count_char = 0
         char = 0
         decimal = 0
@@ -35,7 +35,9 @@ while valido == True:
         Q = 0
         R = 0
         pos = 0
-        pot
+        pot = 0
+    if resultado_pot != 1:
+        resultado_pot = 1
     if digito_hex or resultado_hex or digito_bin or resultado_bin != "": # esqueci de resetar a variavel deu F12FFFF0209DD10 na terceira conta
         num = ""
         string = ""
@@ -266,18 +268,6 @@ while valido == True:
         Q = decimal
         if Q == 0:
             resultado_hex = "0"
-
-        for char_str in num:
-            if pos == -1 : #deu certo de alguma forma inesperada, Deus é bom ## linha 56 tava me dando AVC,
-                break #eu errei no calculo dos resultado
-            else:
-                digito = int(char_str) # não preciso de if, elif pra cada numero
-            #print(f"pos: {pos}, count_char: {count_char}") # foi pra entender o pq tava saindo 4x o resultado ## tava saindo 4x pq tava dentro do for -_-
-            pos -= 1
-            Q = decimal
-            if Q == 0:
-                resultado_hex = "0"
-
         while Q != 0: # para quando chegar no zero
             R = Q % 16 #antes de escrever o tabloíde de IF, que sdds da lista, index e matriz
 
@@ -294,11 +284,10 @@ while valido == True:
             elif R == 14:
                 digito_hex = "E"
             elif R == 15:
-                digito_hex = "F" 
-
-        resultado_hex = digito_hex + resultado_hex
-        Q = Q // 16 # tem que dividir até chegar no Q == 0, melhor do que converter pro binário (humilde opnião)
-    print(resultado_hex)
+                digito_hex = "F"
+            resultado_hex = digito_hex + resultado_hex
+            Q = Q // 16 # tem que dividir até chegar no Q == 0, melhor do que converter pro binário (humilde opnião)
+        print(resultado_hex)
 
     elif tipo == 2 and tipo1 == 4: #Decimal para Binario
         for char_str in num: 
