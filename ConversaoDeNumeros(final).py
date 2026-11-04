@@ -318,8 +318,10 @@ while valido == True:
                 break #eu errei no calculo dos resultado
             else:
                 Q = temp
-                while Q > 2: # tava > 2, entrou em um loop infinito quando foi digitado 100 # diferente de 0 resolveu
-                    print (Q)
+                if Q == 0:
+                    resultado_bin = "0"
+                while Q != 0: # tava > 2, entrou em um loop infinito quando foi digitado 100 # diferente de 0 resolveu
+                    #print (Q)
                     R = Q % 2 # é bom atualizar a variavel
                     #print(f"R:", R) #ignore o print de debug, é só pra ver se tava dando certo
                     Q = Q // 2
