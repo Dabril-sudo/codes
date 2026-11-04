@@ -219,26 +219,27 @@ while valido == True:
         print(resultado_bin)
 
     elif tipo == 2 and tipo1 == 1: #Decimal para Octal
-        for char_str in num: 
-            if char_str == "-": # "Não vai subir ninguem  - Capitao Nascimento contra número negativo.v2"
-                print("Saindo...")
+          for char_str in num: 
+            if char_str == "-": # "Não vai subir ninguem!"  - Capitao Nascimento contra número negativo.v3
+                print("Saindo...") ## PEDE PRA SAIR RECRUTA
                 valido = False
-                break         
-        char = int(char_str) # converte a string char_str para int para poder ser utilizado novamente
-        count_char += 1
-        if count_char > 5:
-            print("Por favor, digitar apenas 5 números")
-            break
-
-        Q = int(num)
-        if Q == 0:
-            resultado_octal = "0"
-        while Q != 0:
-            R = Q % 8
-            if R >= 0 and R <= 7:
-                digito_octal = str(R)
-                resultado_octal = digito_octal + resultado_octal
-                Q = Q //8
+                break          #IMPORTANTE CITAR QUE -1 TEM QUE PARAR
+            else:
+                char = int(char_str) # converte a string char_str para int para poder ser utilizado novamente
+                count_char += 1
+            if count_char > 5:
+                print("Por favor, digitar apenas 5 números")
+                break
+    
+            Q = int(num)
+            if Q == 0:
+                resultado_octal = "0"
+            while Q != 0:
+                R = Q % 8
+                if R >= 0 and R <= 7:
+                    digito_octal = str(R)
+                    resultado_octal = digito_octal + resultado_octal
+                    Q = Q //8
             print("Valor Octal:", resultado_octal) # ta imprimindo o resultado 4 vezes, as duas primeiras certas depois começa a passar, uso if ou não, eis a questão
                                 
     elif tipo == 2 and tipo1 == 2: #Decimal para Decimal
