@@ -261,7 +261,7 @@ while valido == True:
                 break #eu errei no calculo dos resultado
             else:
                 digito = int(char_str) # não preciso de if, elif pra cada numero
-            decimal = decimal + digito * (8 ** pos)
+            decimal = decimal + digito * (10 ** pos)
             pos -= 1
         Q = decimal
         if Q == 0:
