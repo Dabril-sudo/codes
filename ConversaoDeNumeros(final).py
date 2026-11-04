@@ -9,9 +9,11 @@ digito_bin = "" # concatenação do binario, tem que ser string por causa dos 0s
 resultado_octal = "" #resultado do octal
 digito_octal = "" # var para auxilio nas conta, muita conta, muita váriavel e pouco neurônio
 texto_invertido = "" # to criando variavel que nem sabia que teria que criar
+limpo = "" #uma variavel pra limpar zero é sacanagem, mas ta valendo tudo
 #=======================Boolean================================
 valido = True # literalmente o botao de desligar do codigo
 #Reset == False # essa idéia é interessante
+comecou = False #quero ver sobrar zero a esquerda no Octal para Bin
 #=======================Int=====================================
 tipo = 0 # primeira solução
 tipo1 = 0 # segunda seleção
@@ -38,7 +40,7 @@ while valido == True:
         pot = 0
     if resultado_pot != 1:
         resultado_pot = 1
-    if digito_hex or resultado_hex or digito_bin or resultado_bin != "": # esqueci de resetar a variavel deu F12FFFF0209DD10 na terceira conta
+    if digito_hex or resultado_hex or digito_bin or resultado_bin or limpo != "": # esqueci de resetar a variavel deu F12FFFF0209DD10 na terceira conta
         num = ""
         string = ""
         digito_hex = ""
@@ -48,7 +50,9 @@ while valido == True:
         resultado_octal = ""
         digito_octal = ""
         texto_invertido = ""
-        
+        limpo = ""
+    if comecou == True:
+        comecou = False
     print("+====================================================+")
     print("+                   Origem do Número                 +")
     print("+====================================================+")
@@ -182,7 +186,7 @@ while valido == True:
             Q = Q // 16 # tem que dividir até chegar no Q == 0, melhor do que converter pro binário (humilde opnião)
         print(resultado_hex)
 
-    elif tipo == 1 and tipo1 == 4: #Octal pra Binario
+    elif tipo == 1 and tipo1 == 4: #Octal para Binario
         
         for char_str in num:
             char = int(char_str)
@@ -210,13 +214,21 @@ while valido == True:
                 digito_bin = "110"
             elif char == 7:
                 digito_bin = "111"
-            elif char == 8:
-                digito_bin = "1000"
-            elif char == 9:
-                digito_bin = "1001"
 
-            resultado_bin = resultado_bin + digito_bin # eu tinha um sonho de concatenar int, não preciso dizer que deu tudo errado né
-        print(resultado_bin)
+            resultado_bin = resultado_bin + digito_bin # eu tinha um sonho de concatenar int, não preciso dizer que deu tudo errado né, o Ronan tava certo, sobrou 0 a esquerda mesmo
+            #senhores e senhoras, mais um IF para nossa alegria
+        if valido:
+            limpo = ""
+            comecou = False
+            for bit in resultado_bin: # for para rodar a sequencia de caractere
+                if bit == "1": # se tiver 1 ele começa a adicionar na variavel limpo
+                    comecou = True # começou a adicionar na variavel
+                if comecou: # if comecou == True:
+                    limpo = limpo + bit 
+            
+            if limpo == "":# pra pegar o bobo na casca do ovo, vai que adiciona ""
+                limpo = "0"
+            print(limpo)
 
     elif tipo == 2 and tipo1 == 1: #Decimal para Octal
           for char_str in num: 
