@@ -267,18 +267,6 @@ while valido == True:
         if Q == 0:
             resultado_hex = "0"
 
-        while Q != 0: # para quando chegar no zerofor char_str in num: #não sei se pode usar len, vai assim mesmo, melhor prevenir do que remediar
-            if char_str == "-": # "Não vai subir ninguem!"  - Capitao Nascimento contra número negativo
-                print("Saindo...") ## PEDE PRA SAIR RECRUTA
-                valido = False
-                break          #IMPORTANTE CITAR QUE -1 TEM QUE PARAR
-            else:
-                count_char += 1 # acho que esse counter ta com b.o 19/09/2026 - Alex
-                if count_char > 5:
-                    print("Por favor, digitar apenas 5 números")
-                    break
-        pos = count_char - 1 
-        
         for char_str in num:
             if pos == -1 : #deu certo de alguma forma inesperada, Deus é bom ## linha 56 tava me dando AVC,
                 break #eu errei no calculo dos resultado
@@ -290,27 +278,27 @@ while valido == True:
             if Q == 0:
                 resultado_hex = "0"
 
-            while Q != 0: # para quando chegar no zero
-                R = Q % 16 #antes de escrever o tabloíde de IF, que sdds da lista, index e matriz
+        while Q != 0: # para quando chegar no zero
+            R = Q % 16 #antes de escrever o tabloíde de IF, que sdds da lista, index e matriz
 
-                if R < 10: # na teoria, deve funcionar e é bom que otimiza
-                    digito_hex = str(R)
-                elif R == 10:
-                    digito_hex = "A"
-                elif R == 11:
-                    digito_hex = "B"
-                elif R == 12:
-                    digito_hex = "C"
-                elif R == 13:
-                    digito_hex = "D"
-                elif R == 14:
-                    digito_hex = "E"
-                elif R == 15:
-                    digito_hex = "F" 
+            if R < 10: # na teoria, deve funcionar e é bom que otimiza
+                digito_hex = str(R)
+            elif R == 10:
+                digito_hex = "A"
+            elif R == 11:
+                digito_hex = "B"
+            elif R == 12:
+                digito_hex = "C"
+            elif R == 13:
+                digito_hex = "D"
+            elif R == 14:
+                digito_hex = "E"
+            elif R == 15:
+                digito_hex = "F" 
 
-            resultado_hex = digito_hex + resultado_hex
-            Q = Q // 16 # tem que dividir até chegar no Q == 0, melhor do que converter pro binário (humilde opnião)
-        print(resultado_hex)
+        resultado_hex = digito_hex + resultado_hex
+        Q = Q // 16 # tem que dividir até chegar no Q == 0, melhor do que converter pro binário (humilde opnião)
+    print(resultado_hex)
 
     elif tipo == 2 and tipo1 == 4: #Decimal para Binario
         for char_str in num: 
