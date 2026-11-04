@@ -10,6 +10,8 @@ resultado_octal = "" #resultado do octal
 digito_octal = "" # var para auxilio nas conta, muita conta, muita váriavel e pouco neurônio
 texto_invertido = "" # to criando variavel que nem sabia que teria que criar
 limpo = "" #uma variavel pra limpar zero é sacanagem, mas ta valendo tudo
+grupo = ""
+resultado_oct = ""
 #=======================Boolean================================
 valido = True # literalmente o botao de desligar do codigo
 #Reset == False # essa idéia é interessante
@@ -27,9 +29,10 @@ R = 0 #Resto
 pos = 0
 pot = 0 # irmao do pos, diferente do pos, eu sei oque esse faz, serve só pra potencializar
 resultado_pot = 1 #nao vou mexer no pot, nao mexe no que ta funcionando
+cont_grupo = 0
 #=================================Código==========================
 while valido == True:
-    if num or decimal or count_char or char or R or Q or octal or pos or pot != 0: # o famoso if do reset de variavel # posso por uma unica varial (ex: reset == true pra resetar tudo)
+    if num or decimal or count_char or char or R or Q or octal or pos or pot or cont_grupo != 0: # o famoso if do reset de variavel # posso por uma unica varial (ex: reset == true pra resetar tudo)
         count_char = 0
         char = 0
         decimal = 0
@@ -40,7 +43,7 @@ while valido == True:
         pot = 0
     if resultado_pot != 1:
         resultado_pot = 1
-    if digito_hex or resultado_hex or digito_bin or resultado_bin or limpo != "": # esqueci de resetar a variavel deu F12FFFF0209DD10 na terceira conta
+    if digito_hex or resultado_hex or digito_bin or resultado_bin or limpo or grupo or resultado_oct != "": # esqueci de resetar a variavel deu F12FFFF0209DD10 na terceira conta
         num = ""
         string = ""
         digito_hex = ""
@@ -51,6 +54,8 @@ while valido == True:
         digito_octal = ""
         texto_invertido = ""
         limpo = ""
+        grupo = ""
+        resultado_oct = ""
     if comecou == True:
         comecou = False
     print("+====================================================+")
@@ -537,37 +542,53 @@ while valido == True:
             print(resultado_bin)
     
     elif tipo == 4 and tipo1 == 1: #Binario para Octal #feito ##mudei de opnião, binario é muito bom, muito facil converter com o limite de 5 digitos
-        for char_str in num: 
-            if char_str == "-": # "Não vai subir ninguem!"  - Capitao Nascimento contra número negativo.v7
-                print("Saindo...") ## PEDE PRA SAIR RECRUTA
+        for char_str in num:
+            if char_str != "0" and char_str != "1":
+                print("Número binário só aceita 0 e 1")
                 valido = False
-                break          
-            else:
-                count_char += 1
-                if count_char > 5:
-                    print("Por favor, digitar apenas 5 números")
-                    break
-        if len(num) >= 4:
-            print("Nessa conversão, apenas 3 digitos binarios serão aceitos")
-        if num == "000":
-            digito_octal = 0
-        elif num == "001":
-            digito_octal = 1
-        elif num == "010":
-            digito_octal = 2
-        elif num == "011":
-            digito_octal = 3
-        elif num == "100":
-            digito_octal = 4
-        elif num == "101":
-            digito_octal = 5
-        elif num == "110":
-            digito_octal = 6
-        elif num == "111":
-            digito_octal = 7
+                break
+            count_char += 1
+            if count_char > 5:
+                print("Por favor, digitar apenas 5 números")
+                valido = False
+                break
+        if count_char == 0:
+            valido = False
+
+        if valido: # valido == true, ##completa com zeros à esquerda até múltiplo de 3
+            resto = count_char % 3
+        if resto == 1:
+            num_pad = "00" + num
+        elif resto == 2:
+            num_pad = "0" + num
         else:
-            print("numero inválido, apenas 3 digitos")
-        print(digito_octal)
+            num_pad = num
+        for bit in num_pad:
+            grupo = grupo + bit
+            cont_grupo += 1
+
+            if cont_grupo == 3:
+                if grupo == "000":
+                    digito_octal = "0"
+                elif grupo == "001":
+                    digito_octal = "1"
+                elif grupo == "010":
+                    digito_octal = "2"
+                elif grupo == "011":
+                    digito_octal = "3"
+                elif grupo == "100":
+                    digito_octal = "4"
+                elif grupo == "101":
+                    digito_octal = "5"
+                elif grupo == "110":
+                    digito_octal = "6"
+                elif grupo == "111":
+                    digito_octal = "7"
+
+                resultado_oct = resultado_oct + digito_octal
+                grupo = ""          # zera para o próximo grupo
+                cont_grupo = 0
+        print("Octal:", resultado_oct)
                 
     elif tipo == 4 and tipo1 == 2: #Binario para Decimal #feito
         for char_str in num: 
