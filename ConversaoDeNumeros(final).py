@@ -364,17 +364,17 @@ while valido == True:
                     digito = 8
                 elif char_str == "9":
                     digito = 9
-                elif char_str == "A" or char_str == "a":
+                elif char_str == "A":
                     digito = 10
-                elif char_str == "B" or char_str == "b":
+                elif char_str == "B":
                     digito = 11
-                elif char_str == "C" or char_str == "c":
+                elif char_str == "C":
                     digito = 12
-                elif char_str == "D" or char_str == "d":
+                elif char_str == "D" :
                     digito = 13
-                elif char_str == "E" or char_str == "e":
+                elif char_str == "E":
                     digito = 14
-                elif char_str == "F" or char_str == "f":
+                elif char_str == "F":
                     digito = 15
                 else:
                     print("Número hexadecimal inválido")
@@ -420,54 +420,57 @@ while valido == True:
             if char_str == "-": # "Não vai subir ninguem!"  - Capitao Nascimento contra número negativo.v4
                 print("Saindo...") ## PEDE PRA SAIR RECRUTA
                 valido = False
-                break          #IMPORTANTE CITAR QUE -1 TEM QUE PARAR
+                #break          #IMPORTANTE CITAR QUE -1 TEM QUE PARAR
             else:
                 count_char += 1
                 texto_invertido = char_str + texto_invertido # dahora, inverti o texto, e o resto? estaca zero de novo
                 if count_char > 5:
                     print("Por favor, digitar apenas 5 números")
+                    valido = False
+                    #break
+               
+        if valido == True:
+            for char_str in texto_invertido:
+                if char_str == "0":
+                    digito = 0
+                elif char_str == "1":
+                    digito = 1
+                elif char_str == "2":
+                    digito = 2
+                elif char_str == "3":
+                    digito = 3
+                elif char_str == "4":
+                    digito = 4
+                elif char_str == "5":
+                    digito = 5
+                elif char_str == "6":
+                    digito = 6
+                elif char_str == "7":
+                    digito = 7
+                elif char_str == "8":
+                    digito = 8
+                elif char_str == "9":
+                    digito = 9
+                elif char_str == "A":
+                    digito = 10
+                elif char_str == "B":
+                    digito = 11
+                elif char_str == "C":
+                    digito = 12
+                elif char_str == "D" :
+                    digito = 13
+                elif char_str == "E":
+                    digito = 14
+                elif char_str == "F":
+                    digito = 15
+                else:
+                    print("Número hexadecimal inválido")
+                    valido = False
                     break
-                for i in range(len(texto_invertido)): # esse +1 é pra não dar index out of range, mas não sei se é a melhor forma de fazer isso ## favor, opnião nesse len, se pode ou não, se não pode, me fala que eu mudo
-                    char = texto_invertido[count_char] # verificar se isso é permitdo, se nao é for in texto_invertido, char_str, vai dar certo confia po
-                    if char == "0":
-                        digito = 0
-                    elif char == "1":
-                        digito = 1
-                    elif char == "2":
-                        digito = 2
-                    elif char == "3":
-                        digito = 3
-                    elif char == "4":
-                        digito = 4
-                    elif char == "5":
-                        digito = 5
-                    elif char == "6":
-                        digito = 6
-                    elif char == "7":
-                        digito = 7
-                    elif char == "8":
-                        digito = 8
-                    elif char == "9":
-                        digito = 9
-                    elif char == "A":
-                        digito = 10
-                    elif char == "B":
-                        digito = 11
-                    elif char == "C":
-                        digito = 12
-                    elif char == "D":
-                        digito = 13
-                    elif char == "E":
-                        digito = 14
-                    elif char == "F":
-                        digito = 15 
-                    print(f"texto_invertido: {texto_invertido}") #debug
-                    print(f"char: {char}") #debug
-                    decimal = decimal + (digito * 16 ** pot)
-                    pot += 1
-                    if i == len(num):
-                        pass
-        print(decimal)
+                decimal += digito * resultado_pot
+                resultado_pot *= 16
+            if valido == True:    
+                print(decimal)
             
     elif tipo == 3 and tipo1 == 3: #Hexadecimal para Hexadecimal
         print(f"O número continua sendo {num}, pois é a mesma base de conversão.")
