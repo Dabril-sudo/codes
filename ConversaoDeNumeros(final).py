@@ -73,6 +73,9 @@ while valido == True:
         break
 
     num = str(input("Digite o seu número para conversão (1 até 9999) ")).upper() # upper para estética, não sei se é necessário, mas vai que o usuário digita a-f
+    if num == "-1":
+        print("Saindo...")
+        break
 
     print("+====================================================+")
     print("+                 Sistema de conversão               +")
@@ -93,34 +96,24 @@ while valido == True:
     if tipo == 1 and tipo1 == 1: #Octal pra Octal
         print(f"O número continua sendo {num}, pois é a mesma base de conversão.")
     elif tipo == 1 and tipo1 == 2: #Octal para Decimal
-        for char_str in num: #não sei se pode usar len, vai assim mesmo, melhor prevenir do que remediar
-            if char_str == "-": # "Não vai subir ninguem  - Capitao Nascimento contra número negativo"
-                print("Saindo...")
-                valido = False
-                break          #IMPORTANTE CITAR QUE -1 TEM QUE PARAR
-            else:
-                char = int(char_str) # converte a string char_str para int para poder ser utilizado novamente
-                if char < 0 or char > 7: #se for menor que 0 e maior que 7 vai recusar
-                    print("Número tem que ser maior que zero (0) e menor que sete (7) para Octal")
-                    valido = False
-                else:
-                    count_char += 1
-                    if count_char > 5:
-                        print("Por favor, digitar apenas 5 números")
-                        break
-        pos = count_char - 1 
-
         for char_str in num:
-            if pos == -1 : #deu certo de alguma forma inesperada, Deus é bom ## linha 56 tava me dando AVC,
-                break #eu errei no calculo dos resultado
-            else:
-                digito = int(char_str) # não preciso de if, elif pra cada numero
-            #print(f"pos: {pos}, count_char: {count_char}") # foi pra entender o pq tava saindo 4x o resultado ## tava saindo 4x pq tava dentro do for -_-
-            decimal = decimal + digito * (8 ** pos)
-            pos -= 1
-            
-        print("Valor Decimal:", decimal) # ta imprimindo o resultado 4 vezes, as duas primeiras certas depois começa a passar, uso if ou não, eis a questão
-                        
+            if char_str < "0" or char_str > "7":
+                print("Número tem que ser maior que zero (0) e menor que sete (7) para Octal")
+                valido = False
+                break
+            count_char += 1
+            if count_char > 5:
+                print("Por favor, digitar apenas 5 números")
+                valido = False
+                break
+        if valido:
+            pos = count_char - 1
+            for char_str in num:
+                digito = int(char_str)
+                decimal = decimal + digito * (8 ** pos)
+                pos -= 1
+            print("Valor Decimal:", decimal)
+
     elif tipo == 1 and tipo1 == 3: #Octal para Hexadecimal # 15/09
         for char_str in num: #não sei se pode usar len, vai assim mesmo, melhor prevenir do que remediar
             if char_str == "-": # "Não vai subir ninguem!"  - Capitao Nascimento contra número negativo
@@ -242,27 +235,31 @@ while valido == True:
                 print("Número decimal só aceita dígitos de 0 a 9")
                 valido = False
                 break
-            if char_str == "-": # "Não vai subir ninguem!" - Capitao Nascimento contra número negativo.v4
-                print("Saindo...") ## PEDE PRA SAIR RECRUTA
-                valido = False
-                break
             count_char += 1
-            if count_char > 5:
-                print("Por favor, digitar apenas 5 números")
+            if count_char > 4:
+                print("Por favor, digitar apenas 4 dígitos")
                 valido = False
                 break
-            else:
-                 Q = int(num)
-                if Q == 0:
-                    resultado_octal = "0"
-                while Q != 0:
-                    R = Q % 8
-                    if R >= 0 and R <= 7:
-                        digito_octal = str(R)
-                        resultado_octal = digito_octal + resultado_octal
-                        Q = Q //8
-        print("Valor Octal:", resultado_octal) # ta imprimindo o resultado 4 vezes, as duas primeiras certas depois começa a passar, uso if ou não, eis a questão
-                                
+
+        if valido:
+            pos = count_char - 1
+            for char_str in num:
+                decimal = decimal + int(char_str) * (10 ** pos)
+                pos -= 1
+
+            if decimal < 1 or decimal > 9999:
+                print("O número tem que estar entre 1 e 9999")
+                valido = False
+
+        if valido:
+            Q = decimal
+            while Q != 0:
+                R = Q % 8
+                digito_octal = str(R)
+                resultado_octal = digito_octal + resultado_octal
+                Q = Q // 8
+            print("Valor Octal:", resultado_octal)
+
     elif tipo == 2 and tipo1 == 2: #Decimal para Decimal
         print(f"O número continua sendo {num}, pois é a mesma base de conversão.")
 
@@ -273,47 +270,45 @@ while valido == True:
                 valido = False
                 break
             count_char += 1
-            if count_char > 5:
-                print("Por favor, digitar apenas 5 números")
+            if count_char > 4:
+                print("Por favor, digitar apenas 4 dígitos")
                 valido = False
                 break
-        for char_str in num: # sou um genio
-            if char_str == "-": # "Não vai subir ninguem!" - Capitao Nascimento contra número negativo.v4
-                print("Saindo...") ## PEDE PRA SAIR RECRUTA
-                valido = False
-                break 
-        pos = count_char - 1 
-        
-        for char_str in num:
-            if pos == -1 : #deu certo de alguma forma inesperada, Deus é bom ## linha 56 tava me dando AVC,
-                break #eu errei no calculo dos resultado
-            else:
-                digito = int(char_str) # não preciso de if, elif pra cada numero
-            decimal = decimal + digito * (10 ** pos)
-            pos -= 1
-        Q = decimal
-        if Q == 0:
-            resultado_hex = "0"
-        while Q != 0: # para quando chegar no zero
-            R = Q % 16 #antes de escrever o tabloíde de IF, que sdds da lista, index e matriz
 
-            if R < 10: # na teoria, deve funcionar e é bom que otimiza
-                digito_hex = str(R)
-            elif R == 10:
-                digito_hex = "A"
-            elif R == 11:
-                digito_hex = "B"
-            elif R == 12:
-                digito_hex = "C"
-            elif R == 13:
-                digito_hex = "D"
-            elif R == 14:
-                digito_hex = "E"
-            elif R == 15:
-                digito_hex = "F"
-            resultado_hex = digito_hex + resultado_hex
-            Q = Q // 16 # tem que dividir até chegar no Q == 0, melhor do que converter pro binário (humilde opnião)
-        print(resultado_hex)
+        if valido:
+            pos = count_char - 1
+            for char_str in num:
+                decimal = decimal + int(char_str) * (10 ** pos)
+                pos -= 1
+
+            if decimal < 1 or decimal > 9999:
+                print("O número tem que estar entre 1 e 9999")
+                valido = False
+
+        if valido:
+            Q = decimal
+            if Q == 0:
+                resultado_hex = "0"
+            while Q != 0:
+                R = Q % 16
+
+                if R < 10:
+                    digito_hex = str(R)
+                elif R == 10:
+                    digito_hex = "A"
+                elif R == 11:
+                    digito_hex = "B"
+                elif R == 12:
+                    digito_hex = "C"
+                elif R == 13:
+                    digito_hex = "D"
+                elif R == 14:
+                    digito_hex = "E"
+                elif R == 15:
+                    digito_hex = "F"
+                resultado_hex = digito_hex + resultado_hex
+                Q = Q // 16
+            print(resultado_hex)
 
     elif tipo == 2 and tipo1 == 4:  # Decimal para Binario
         for char_str in num:
@@ -589,6 +584,22 @@ while valido == True:
                 cont_grupo += 1
 
                 if cont_grupo == 3:
+                    if grupo == "000":
+                        digito_octal = "0"
+                    elif grupo == "001":
+                        digito_octal = "1"
+                    elif grupo == "010":
+                        digito_octal = "2"
+                    elif grupo == "011":
+                        digito_octal = "3"
+                    elif grupo == "100":
+                        digito_octal = "4"
+                    elif grupo == "101":
+                        digito_octal = "5"
+                    elif grupo == "110":
+                        digito_octal = "6"
+                    elif grupo == "111":
+                        digito_octal = "7"
                     resultado_oct = resultado_oct + digito_octal
                     grupo = ""
                     cont_grupo = 0
@@ -596,34 +607,30 @@ while valido == True:
             print(resultado_oct)
                 
     elif tipo == 4 and tipo1 == 2: #Binario para Decimal #feito
-        for char_str in num:
-            if char_str != "0" and char_str != "1": #lembrei agora de fazer a verificacao nos caracteres, e la vamos nos adicionar 15
-                print("Número binário só aceita 0 e 1") #ifs personalizados uuuuuuuuuuuuuhhhhhhhhhhhhhhhhhhhhuuuuuuuuuuuuuuullllllllllllllllllllllllllllllllllllllllllllllllllllllllll
-                valido = False
-                break
-            if count_char > 5:
-                print("Por favor, digitar apenas 5 números")
-                valido = False
-                break
-            count_char += 1
-        for char_str in num:
-            if char_str == "-": # "Não vai subir ninguem!" - Capitao Nascimento contra número negativo.v4
-                print("Saindo...") ## PEDE PRA SAIR RECRUTA
-                valido = False
-                break 
-        if valido:
-            for bit in num: # 10110 1-0-1-1-0
-                decimal = decimal * 2 + int(bit) #BIT 1 = 0 * 2 + 1 DEC 1, BIT 2 =  1 * 2 + 0 DEC 2
-        print(decimal) #BIT 3 = 2 * 2 + 1 DEC 5 BIT 4 = 5 * 2 + 1 DEC 11 BIT 5 = 11 * 2 + 0 DEC 22
         
-
-      elif tipo == 4 and tipo1 == 3:  # Binario para Hexadecimal
         for char_str in num:
             if char_str != "0" and char_str != "1":
                 print("Número binário só aceita 0 e 1")
                 valido = False
-                break       count_char += 1
-     
+                break
+            count_char += 1
+            if count_char > 14:
+                print("Por favor, digitar apenas 14 dígitos binários")
+                valido = False
+                break
+        if valido:
+            for bit in num:
+                decimal = decimal * 2 + int(bit)
+            print(decimal)
+
+    elif tipo == 4 and tipo1 == 3:  # Binario para Hexadecimal
+        for char_str in num:
+            if char_str != "0" and char_str != "1":
+                print("Número binário só aceita 0 e 1")
+                valido = False
+                break
+            count_char += 1
+
             if count_char > 14:
                 print("Por favor, digitar apenas 14 dígitos binários")
                 valido = False
