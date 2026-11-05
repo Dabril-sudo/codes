@@ -236,44 +236,52 @@ while valido == True:
             print(limpo)
 
     elif tipo == 2 and tipo1 == 1: #Decimal para Octal
-          for char_str in num: 
-            if char_str == "-": # "Não vai subir ninguem!"  - Capitao Nascimento contra número negativo.v3
-                print("Saindo...") ## PEDE PRA SAIR RECRUTA
+        for char_str in num:
+            if char_str < "0" or char_str > "9":
+                print("Número decimal só aceita dígitos de 0 a 9")
                 valido = False
-                break          #IMPORTANTE CITAR QUE -1 TEM QUE PARAR
-            else:
-                char = int(char_str) # converte a string char_str para int para poder ser utilizado novamente
-                count_char += 1
+                break
+            count_char += 1
             if count_char > 5:
                 print("Por favor, digitar apenas 5 números")
+                valido = False
                 break
+        for char_str in num:
+            if char_str == "-": # "Não vai subir ninguem!" - Capitao Nascimento contra número negativo.v4
+                print("Saindo...") ## PEDE PRA SAIR RECRUTA
+                valido = False
+                break 
     
-            Q = int(num)
-            if Q == 0:
-                resultado_octal = "0"
-            while Q != 0:
-                R = Q % 8
-                if R >= 0 and R <= 7:
-                    digito_octal = str(R)
-                    resultado_octal = digito_octal + resultado_octal
-                    Q = Q //8
-            print("Valor Octal:", resultado_octal) # ta imprimindo o resultado 4 vezes, as duas primeiras certas depois começa a passar, uso if ou não, eis a questão
+        Q = int(num)
+        if Q == 0:
+            resultado_octal = "0"
+        while Q != 0:
+            R = Q % 8
+            if R >= 0 and R <= 7:
+                digito_octal = str(R)
+                resultado_octal = digito_octal + resultado_octal
+                Q = Q //8
+        print("Valor Octal:", resultado_octal) # ta imprimindo o resultado 4 vezes, as duas primeiras certas depois começa a passar, uso if ou não, eis a questão
                                 
     elif tipo == 2 and tipo1 == 2: #Decimal para Decimal
         print(f"O número continua sendo {num}, pois é a mesma base de conversão.")
 
     elif tipo == 2 and tipo1 == 3: #Decimal para Hexadecimal
-        for char_str in num: 
-            if char_str == "-": # "Não vai subir ninguem!"  - Capitao Nascimento contra número negativo.v3
+        for char_str in num:
+            if char_str < "0" or char_str > "9":
+                print("Número decimal só aceita dígitos de 0 a 9")
+                valido = False
+                break
+            count_char += 1
+            if count_char > 5:
+                print("Por favor, digitar apenas 5 números")
+                valido = False
+                break
+        for char_str in num: # sou um genio
+            if char_str == "-": # "Não vai subir ninguem!" - Capitao Nascimento contra número negativo.v4
                 print("Saindo...") ## PEDE PRA SAIR RECRUTA
                 valido = False
-                break          #IMPORTANTE CITAR QUE -1 TEM QUE PARAR
-            else:
-                char = int(char_str) # converte a string char_str para int para poder ser utilizado novamente
-                count_char += 1
-                if count_char > 5:
-                    print("Por favor, digitar apenas 5 números")
-                    break
+                break 
         pos = count_char - 1 
         
         for char_str in num:
@@ -308,16 +316,21 @@ while valido == True:
         print(resultado_hex)
 
     elif tipo == 2 and tipo1 == 4: #Decimal para Binario
-        for char_str in num: 
-            if char_str == "-": # "Não vai subir ninguem!"  - Capitao Nascimento contra número negativo.v4
+        for char_str in num:
+            if char_str < "0" or char_str > "9":
+                print("Número decimal só aceita dígitos de 0 a 9")
+                valido = False
+                break
+            count_char += 1
+            if count_char > 5:
+                print("Por favor, digitar apenas 5 números")
+                valido = False
+                break
+        for char_str in num: # ACREDITA QUE EU APGAUE A VALIDACAO DE NEGATIVO
+            if char_str == "-": # "Não vai subir ninguem!" - Capitao Nascimento contra número negativo.v4
                 print("Saindo...") ## PEDE PRA SAIR RECRUTA
                 valido = False
-                break          #IMPORTANTE CITAR QUE -1 TEM QUE PARAR
-            else:
-                count_char += 1
-                if count_char > 5:
-                    print("Por favor, digitar apenas 5 números")
-                    break
+                break 
         pos = count_char - 1 
         temp = int(num)
         for char_str in num:
@@ -336,6 +349,16 @@ while valido == True:
         print(resultado_bin)
     
     elif tipo == 3 and tipo1 == 1: #Hexadecimal para Octal
+        for char_str in num:
+            if not (("0" <= char_str <= "9") or ("A" <= char_str <= "F")):
+                print("Número hexadecimal só aceita 0-9 e A-F")
+                valido = False
+                break
+            count_char += 1
+            if count_char > 5:
+                print("Por favor, digitar apenas 5 caracteres")
+                valido = False
+                break
         for char_str in num:
             if char_str == "-": # "Não vai subir ninguem!" - Capitao Nascimento contra número negativo.v4
                 print("Saindo...") ## PEDE PRA SAIR RECRUTA
@@ -552,6 +575,11 @@ while valido == True:
                 print("Por favor, digitar apenas 5 números")
                 valido = False
                 break
+        for char_str in num:
+            if char_str == "-": # "Não vai subir ninguem!" - Capitao Nascimento contra número negativo.v4 ## acredite, esse bloco foi colado mais de 32 vezes aqui
+                print("Saindo...") ## PEDE PRA SAIR RECRUTA                                               ## nesse codigo
+                valido = False
+                break 
         if count_char == 0:
             valido = False
 
@@ -588,105 +616,94 @@ while valido == True:
                 resultado_oct = resultado_oct + digito_octal
                 grupo = ""          # zera para o próximo grupo
                 cont_grupo = 0
-        print("Octal:", resultado_oct)
+        print(resultado_oct)
                 
     elif tipo == 4 and tipo1 == 2: #Binario para Decimal #feito
-        for char_str in num: 
-            if char_str == "-": # "Não vai subir ninguem!"  - Capitao Nascimento contra número negativo.v7
-                print("Saindo...") ## PEDE PRA SAIR RECRUTA
+        for char_str in num:
+            if char_str != "0" and char_str != "1": #lembrei agora de fazer a verificacao nos caracteres, e la vamos nos adicionar 15
+                print("Número binário só aceita 0 e 1") #ifs personalizados uuuuuuuuuuuuuhhhhhhhhhhhhhhhhhhhhuuuuuuuuuuuuuuullllllllllllllllllllllllllllllllllllllllllllllllllllllllll
                 valido = False
-                break          
-            else:
-                count_char += 1
+                break
+            count_char += 1
             if count_char > 5:
                 print("Por favor, digitar apenas 5 números")
+                valido = False
                 break
-            if num == "0000":
-                decimal = 0
-            elif num == "0001":
-                decimal = 1
-            elif num == "0010":
-                decimal = 2
-            elif num == "0011":
-                decimal = 3
-            elif num == "0100":
-                decimal = 4
-            elif num == "0101":
-                decimal = 5
-            elif num == "0110":
-                decimal = 6
-            elif num == "0111":
-                decimal = 7
-            elif num == "1000":
-                decimal = 8
-            elif num == "1001":
-                decimal = 9
-            elif num == "1010":
-                decimal = 10
-            elif num == "1011":
-                decimal = 11
-            elif num == "1100":
-                decimal = 12
-            elif num == "1101":
-                decimal = 13
-            elif num == "1110":
-                decimal = 14
-            elif num == "1111":
-                decimal = 15
-            print(decimal)
-
-    elif tipo == 4 and tipo1 == 3: #Binario para Hexadecimal # testar conversão, ta muito suspeito de fácil
-        for char_str in num: 
-            if char_str == "-": # "Não vai subir ninguem!"  - Capitao Nascimento contra número negativo.v7
+        for char_str in num:
+            if char_str == "-": # "Não vai subir ninguem!" - Capitao Nascimento contra número negativo.v4
                 print("Saindo...") ## PEDE PRA SAIR RECRUTA
                 valido = False
-                break          
-            else:
-                count_char += 1
-                if count_char > 5:
-                    print("Por favor, digitar apenas 5 números")
-                    break
-        # Iinput é 4 digitos, 16 combinaçoes, ou seja, 16 fodendos IFs quero nem saber
-        ## tenho cerebro pra conta mais não, agora é só por assosiação bb
-        if num == "0000": # toma
-            resultado_hex = "0"
-        elif num == "0001": # o gigantesco tabloide da preguiça
-            resultado_hex = "1"
-        elif num == "0010": # eu me orgulho disso
-            resultado_hex = "2"
-        elif num == "0011":
-            resultado_hex = "3"
-        elif num == "0100":
-            resultado_hex = "4"
-        elif num == "0101":
-            resultado_hex = "5"
-        elif num == "0110":# cara, pra 0 e 1, é muito facil se perder na ordem
-            resultado_hex = "6"
-        elif num == "0111":
-            resultado_hex = "7"
-        elif num == "1000":
-            resultado_hex = "8"
-        elif num == "1001":
-            resultado_hex = "9"
-        elif num == "1010":
-            resultado_hex = "A"
-        elif num == "1011":
-            resultado_hex = "B"
-        elif num == "1100": # esses ultimos doeu a cabeça
-            resultado_hex = "C"
-        elif num == "1101":
-            resultado_hex = "D"
-        elif num == "1110":
-            resultado_hex = "E"
-        elif num == "1111":
-            resultado_hex = "F"
-        print(resultado_hex)
-   
-    elif tipo == 4 and tipo1 == 4: #Binario para Binario
-        print(f"o numero é {num} pois é a mesma base ")
+                break 
+        if valido:
+            decimal = 0
+        for bit in num: # 10110 1-0-1-1-0
+            decimal = decimal * 2 + int(bit) #BIT 1 = 0 * 2 + 1 DEC 1, BIT 2 =  1 * 2 + 0 DEC 2
+        print(decimal) #BIT 3 = 2 * 2 + 1 DEC 5 BIT 4 = 5 * 2 + 1 DEC 11 BIT 5 = 11 * 2 + 0 DEC 22
+        
+
+    elif tipo == 4 and tipo1 == 3: #Binario para Hexadecimal # testar conversão, ta muito suspeito de fácil ## pra surpresa de 0 pessoas tava tudo cagado
+        for char_str in num:
+            if char_str != "0" and char_str != "1": # nao augneto mais
+                print("Número binário só aceita 0 e 1") # vou dormir sonhando ocm essa interface
+                valido = False
+                break
+            count_char += 1
+            if count_char > 5:
+                print("Por favor, digitar apenas 5 números") # onde eu estava mesmo
+                valido = False
+                break
+        for char_str in num:
+            if char_str == "-": # "Não vai subir ninguem!" - Capitao Nascimento contra número negativo.v4
+                print("Saindo...") ## PEDE PRA SAIR RECRUTA
+                valido = False
+                break 
+        if valido:
+            resto = count_char % 4 # resto da divisao pra descovrir quantos 0 faltam
+        if resto == 1:
+            num_pad = "000" + num
+        elif resto == 2:
+            num_pad = "00" + num
+        elif resto == 3:
+            num_pad = "0" + num # o octal nao ia até 3 senao me egngano
+        else: # se eu estiver enganado, my bad
+            num_pad = num
+    
+        for bit in num_pad: # surpreendente mente a mesma logica que o octal
+            grupo = grupo + bit
+            cont_grupo += 1
+    
+            if cont_grupo == 4:
+                # calcula o valor do grupo (0 a 15) bit a bit
+                valor = 0
+                for b in grupo:
+                    valor = valor * 2 + int(b) # mesma logica que o octal
+    
+                #  mais de 1000 ifs depois,,,
+                if valor < 10:
+                    resultado = resultado + str(valor)
+                elif valor == 10:
+                    resultado = resultado + "A"
+                elif valor == 11:
+                    resultado = resultado + "B"
+                elif valor == 12:
+                    resultado = resultado + "C"
+                elif valor == 13:
+                    resultado = resultado + "D"
+                elif valor == 14:
+                    resultado = resultado + "E"
+                else:
+                    resultado = resultado + "F"
+    
+                grupo = "" #NAO APGAR
+                cont_grupo = 0 #EU ESQUECI, VERY IMPORTANT
+        
+            print(resultado) # rapaz, tudo que tinha no exercicio eu fiz errado nesse ultimo
+            # derreteu meus neuronios ja
 
 
 #--------------------------------------#
+# resetar as variaveis no inicio de cada if seria top, talvez eu consiga ainda
+# ia ficar melhor que resetar tudo em ma linha so
 # é necessário um for pra verificar se tem negativo?
 
 #==============Bloco de explicação============================
