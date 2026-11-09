@@ -70,6 +70,8 @@ while valido == True:
     print("+                (3) Número Hexadecimal              +")
     print("+                (4) Número Binário                  +")
     print("+====================================================+")
+    print("+                (-1) Para SAIR                      +")
+    print("+====================================================+")
 
     tipo = int(input("Digite a origem do seu número para conversão (1 até 4)"  ))
     if tipo == -1:
@@ -77,7 +79,7 @@ while valido == True:
         break
 
     num = str(input("Digite o seu número para conversão (1 até 9999) ")).upper() # upper para estética, não sei se é necessário, mas vai que o usuário digita a-f
-    if num == "-1":
+    if num == "-1": # acredito que dá pra validar aqui com if tipo == 1, tipo == 2, para pegar caracteres invalidos, ficaria mais bonito e mais fácil de mexer pois fica no começo e não vou precisar de 16 CTRL C e CTRL V
         print("Saindo...")
         break
 
@@ -89,7 +91,9 @@ while valido == True:
     print("+                (3) Número Hexadecimal              +")
     print("+                (4) Número Binário                  +")
     print("+====================================================+")
-
+    print("+                (-1) Para SAIR                      +")
+    print("+====================================================+")
+    
     tipo1 = int(input(f"Selecione o sistema que queira converter o número {num} "))
     if tipo1 == -1:
         print ("saindo...")
