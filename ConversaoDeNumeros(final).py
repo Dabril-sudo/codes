@@ -1,4 +1,8 @@
 #14/09
+#To-Do
+# verificação de input vazio
+# verificação hexa se não for A-F
+# verificação em outras bases para caracter incorreto
 #=======================Strings===============================
 num = "" # contraditório não é?, eu também to achando
 string = "" # o importante é funcionar
