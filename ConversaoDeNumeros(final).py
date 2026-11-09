@@ -3,6 +3,7 @@
 # verificação de input vazio
 # verificação hexa se não for A-F
 # verificação em outras bases para caracter incorreto
+#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! URGENTEMENTE VERIFICAR O FOR NA LINHA 114, TEM MUITA COISA ERRADA ALI
 #=======================Strings===============================
 num = "" # contraditório não é?, eu também to achando
 string = "" # o importante é funcionar
@@ -110,7 +111,7 @@ while valido == True:
                 valido = False
                 break
             count_char += 1
-            if count_char > 5:
+            if count_char > 5: # TEM COISA MUITO ERRADA AQUI, INPUT MAX = 9999 E TA MAIOR QUE 5, OU SEJA 6, TINHA QUE SER > 4
                 print("Por favor, digitar apenas 5 números")
                 valido = False
                 break
